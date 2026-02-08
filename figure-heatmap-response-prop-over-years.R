@@ -36,7 +36,7 @@ var_list <- list(
   autism=names_list$var[variable=="k2q35a"])
 setkey(names_list$define, year, variable)
 surveys_meta <- setkey(sizes_dt[data_type=="surveys"], year)
-dcast(surveys_meta, year ~ ., value.var=c("rows","cols"))
+surveys_meta[, .(year, rows, cols)]
 for(vname in names(var_list)){
   year_var <- setkey(var_list[[vname]], year, variable)
   title_list <- list()
