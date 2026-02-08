@@ -27,7 +27,7 @@ After combining the years, we should re-run this analysis to confirm consistency
 It also computes a table of counts of rows and columns of survey data in each year.
 
 ```r
-> dcast(surveys_meta, year ~ ., value.var=c("rows","cols"))
+> surveys_meta[, .(year, rows, cols)]
     year  rows  cols
 1:  2016 50212   432
 2:  2017 21599   436
