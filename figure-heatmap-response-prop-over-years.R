@@ -1,4 +1,5 @@
 library(data.table)
+library(ggplot2)
 sizes_dt <- fread("NSCH_data/01_original_sizes.csv")
 names_list <- list()
 for(dtype in c("var","define")){
@@ -30,15 +31,8 @@ years_by(var_autism)
 years_by(names_list$var[desc=="Family Structure"])
 years_by(names_list$var[variable=="k6q71_r"])
 
-var_list <- list(
-  family=names_list$var[desc=="Family Structure"],
-  interest_curiosity=names_list$var[variable=="k6q71_r"],
-  autism=names_list$var[variable=="k2q35a"])
-setkey(names_list$define, year, variable)
-surveys_meta <- setkey(sizes_dt[data_type=="surveys"], year)
-surveys_meta[, .(year, rows, cols)]
-for(vname in names(var_list)){
-  year_var <- setkey(var_list[[vname]], year, variable)
+compare_props <- function(var_dt){
+  year_var <- setkey(var_dt, year, variable)
   title_list <- list()
   for(title_var in c("variable","desc")){
     ydt <- years_by(year_var, title_var)
@@ -57,26 +51,47 @@ for(vname in names(var_list)){
     decode_dt, c("value","response")
   )[order(value,years)]
   levs <- levels_dt$response
-  count_dt <- decode_dt[
-  , .(count=.N), by=.(year,Response=factor(response,levs))
-  ][, prop := count/sum(count), by=year]
-  title_items <- unlist(title_list)
-  gg <- ggplot()+
-    ggtitle(paste(title_items, collapse=",\n"))+
+  structure(list(
+    title_items=unlist(title_list),
+    levs=levs,
+    count_dt=decode_dt[
+    , .(count=.N), by=.(year,Response=factor(response,levs))
+    ][, prop := count/sum(count), by=year][]),
+    class="compare_props")
+}
+
+plot.compare_props <- function(x, ...){
+  ggplot()+
+    ggtitle(paste(x$title_items, collapse=",\n"))+
     geom_tile(aes(
       year, Response, fill=log10(prop)),
-      data=count_dt)+
+      data=x$count_dt)+
     scale_fill_gradient(low="white", high="red")+
     geom_text(aes(
       year, Response, label=sprintf("%.1f", prop*100)),
-      data=count_dt)+
-    scale_x_continuous(breaks=unique(count_dt$year))
+      data=x$count_dt)+
+    scale_x_continuous(breaks=unique(x$count_dt$year))
+}
+
+var_list <- list(
+  family=names_list$var[desc=="Family Structure"],
+  interest_curiosity=names_list$var[variable=="k6q71_r"],
+  autism=names_list$var[variable=="k2q35a"])
+setkey(names_list$define, year, variable)
+surveys_meta <- setkey(sizes_dt[data_type=="surveys"], year)
+surveys_meta[, .(year, rows, cols)]
+for(vname in names(var_list)){
+  var_dt <- var_list[[vname]]
+  compare_list <- compare_props(var_dt)
+  gg <- plot(compare_list)
   out.png <- sprintf(
     "figure-heatmap-response-prop-over-years-%s.png",
     vname)
   print(out.png)
-  vertical.items <- length(c(levs,title_items))
-  png(out.png,width=6+max(nchar(levs))*0.05,height=1+vertical.items*0.2,units="in",res=200)
+  vertical.items <- with(compare_list, length(c(levs,title_items)))
+  width_in <- 6+max(nchar(compare_list$levs))*0.05
+  height_in <- 1+vertical.items*0.2
+  png(out.png, width=width_in, height=height_in, units="in", res=200)
   print(gg)
   dev.off()
 }
