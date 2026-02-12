@@ -22,7 +22,7 @@ parse_dta <- function(f)list(surveys=haven::read_stata(f))
 
 Stata2csv <- function(Stata_dir, csv_dir, year, verbose=FALSE){
   file_list <- list(
-    "nsch_%d_topical.do"=parse_do,
+    "nsch_%d_topical.do"=nsch::parse_do,
     "nsch_%de_topical.dta"=parse_dta)
   year_dir <- file.path(csv_dir, year)
   if(verbose)cat(sprintf("converting %s to %s\n", Stata_dir, year_dir))
@@ -63,26 +63,6 @@ get_year <- function(year_url, data.dir=tempdir()){
   unzip(data.dir.year.zip, exdir=data.dir)
 }
 
-do_patterns <- list(
-  var=list(),
-  define=list("_lab +", value=".*?"))
-parse_do <- function(year.do){
-  do_list <- list()
-  for(data_type in names(do_patterns)){
-    do_list[[data_type]] <- nc::capture_all_str(
-      year.do,
-      "label ",
-      data_type,
-      " ",
-      variable=".*?",
-      do_patterns[[data_type]],
-      ' +"',
-      desc=".*?",
-      '"')
-  }
-  do_list
-}
-
 get_years_csv <- function(data_dir, verbose=FALSE){
   original_Stata <- file.path(data_dir, "00_original_Stata")
   dir.create(original_Stata, showWarnings = FALSE, recursive = TRUE)
@@ -105,6 +85,6 @@ get_years_csv <- function(data_dir, verbose=FALSE){
 }
 
 library(data.table)
-remotes::install_github("NAU-ASD3/nsch@download-funs")
+remotes::install_github("NAU-ASD3/nsch@parse_do")
 (size_dt <- get_years_csv("NSCH_data", verbose=TRUE))
 dcast(size_dt, year ~ data_type, value.var=c("rows", "cols"))
