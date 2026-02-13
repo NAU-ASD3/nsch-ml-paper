@@ -2,6 +2,10 @@
 
 Interpretable machine learning analyses of NSCH data.
 
+## 13 Feb 2026
+
+[NSCH_data_example_2024.R](NSCH_data_example_2024.R) creates a small example data set with 2 rows, to use as an example in the R package.
+
 ## 8 Feb 2026
 
 [NSCH_data.R](NSCH_data.R) downloads data from NSCH web site.

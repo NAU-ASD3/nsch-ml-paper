@@ -42,27 +42,6 @@ Stata2csv <- function(Stata_dir, csv_dir, year, verbose=FALSE){
   rbindlist(size_dt_list)
 }
 
-get_year <- function(year_url, data.dir=tempdir()){
-  year.html <- basename(year_url)
-  data.dir.year.html <- file.path(data.dir, year.html)
-  if(!file.exists(data.dir.year.html)){
-    download.file(year_url, data.dir.year.html)
-  }
-  url.dt <- nc::capture_all_str(
-    data.dir.year.html,
-    url=list(
-      "//.*?",
-      base="[^/]*topical_Stata[.]zip"))
-  if(nrow(url.dt)==0)
-    stop("no topical_Stata.zip urls on ", year_url)
-  http_url <- paste0("http:", url.dt$url)
-  data.dir.year.zip <- file.path(data.dir, url.dt$base)
-  if(!file.exists(data.dir.year.zip)){
-    download.file(http_url, data.dir.year.zip)
-  }
-  unzip(data.dir.year.zip, exdir=data.dir)
-}
-
 get_years_csv <- function(data_dir, verbose=FALSE){
   original_Stata <- file.path(data_dir, "00_original_Stata")
   dir.create(original_Stata, showWarnings = FALSE, recursive = TRUE)
@@ -71,7 +50,7 @@ get_years_csv <- function(data_dir, verbose=FALSE){
   size_dt_list <- list()
   for(year_i in 1:nrow(index_dt)){
     index_row <- index_dt[year_i]
-    get_year(index_row$url, original_Stata)
+    nsch::get_year(index_row$url, original_Stata)
     year_dt <- Stata2csv(
       original_Stata, csv_dir,
       index_row$year, verbose=TRUE)
@@ -85,18 +64,7 @@ get_years_csv <- function(data_dir, verbose=FALSE){
 }
 
 library(data.table)
-remotes::install_github("NAU-ASD3/nsch@parse_do")
+remotes::install_github("NAU-ASD3/nsch@download-year")
 (size_dt <- get_years_csv("NSCH_data", verbose=TRUE))
 dcast(size_dt, year ~ data_type, value.var=c("rows", "cols"))
-
-s2024 <- fread("NSCH_data/01_original_csv/2024/surveys.csv")
-haven::write_dta(s2024[1:2], "nsch_2024e_topical.dta")
-file.copy("NSCH_data/00_original_Stata/nsch_2024_topical.do", "nsch_2024_topical.do")
-small_zip <- "~/R/nsch/inst/extdata/nsch_2024_topical_Stata.zip"
-unlink(small_zip)
-zip(small_zip, c("nsch_2024_topical.do", "nsch_2024e_topical.dta"))
-NSCH_small <- "NSCH_data_small"
-dir.create(NSCH_small, showWarnings = FALSE, recursive = TRUE)
-unzip(small_zip, exdir=NSCH_small)
-
 
