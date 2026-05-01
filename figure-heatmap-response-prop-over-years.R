@@ -1,6 +1,6 @@
 library(data.table)
 library(ggplot2)
-sizes_dt <- fread("NSCH_data/01_original_sizes.csv")
+sizes_dt <- fread("NSCH_data/01_cleanTypes_sizes.csv")
 names_list <- list()
 for(dtype in c("var","define")){
   names_list[[dtype]] <- sizes_dt[
