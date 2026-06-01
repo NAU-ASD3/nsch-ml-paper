@@ -1,0 +1,178 @@
+ℹ Loading nsch
+=== Label drift audit summary ===
+Total drift cases (variable+value with >1 distinct label across years): 48
+Fully handled by transform override:    4
+Partially handled (some years covered): 29
+Unhandled:                              15
+
+=== Unhandled drift cases ===
+          variable  value
+            <char> <char>
+ 1:       a1_grade      5
+ 2:       a1_grade      7
+ 3:       a1_grade      8
+ 4:       a2_grade      5
+ 5:       a2_grade      7
+ 6:       a2_grade      8
+ 7:        k11q43r     13
+ 8: k2q35a_1_years     15
+ 9:         k2q35d      7
+10:        k4q02_r      1
+11:        k4q02_r      6
+12:        k5q20_r      3
+13:        wgtconc      1
+14:        wgtconc      2
+15:        wgtconc      3
+                                                                                                                                unique_descs
+                                                                                                                                      <char>
+ 1:                                                                 Some College Credit, but no Degree || Some College Credit, but No Degree
+ 2:                                                                         Bachelor's Degree (BA, BS, AB) || Bachelor’s Degree (BA, BS, AB)
+ 3:                                                                 Master's Degree (MA, MS, MSW, MBA) || Master’s Degree (MA, MS, MSW, MBA)
+ 4:                                                                 Some College Credit, but no Degree || Some College Credit, but No Degree
+ 5:                                                                         Bachelor's Degree (BA, BS, AB) || Bachelor’s Degree (BA, BS, AB)
+ 6:                                                                 Master's Degree (MA, MS, MSW, MBA) || Master’s Degree (MA, MS, MSW, MBA)
+ 7:                                                                                                                   13 or 14 || 13 or more
+ 8:                                                                                                                 15 to 17 || 15, 16 or 17
+ 9:                                                                                                                  Don't Know || Dont Know
+10:                                                                                                        Doctor's Office || Doctors Office
+11:                                   School (Nurse's Office, Athletic Trainer's Office) || School (Nurses Office, Athletic Trainers Office)
+12: Did not see more than one health care provider in past 12 months || Did not see more than one health care provider in the PAST 12 MONTHS
+13:                                                                                                  Yes, it's too high || Yes, its too high
+14:                                                                                                    Yes, it's too low || Yes, its too low
+15:                                                                                              No, I am not concerned || No, not concerned
+
+=== Partially-handled drift cases ===
+        variable  value
+          <char> <char>
+ 1:  a2_relation      8
+ 2:    arrangehc      6
+ 3:     athomehc      6
+ 4:      birthwt      1
+ 5:      birthwt      2
+ 6:      birthwt      3
+ 7:      currins      1
+ 8:      currins      2
+ 9:    hcability      1
+10:      higrade      1
+11:      higrade      2
+12:      higrade      3
+13: higrade_tvis      1
+14: higrade_tvis      2
+15:   hospitaler      1
+16:   hospitaler      2
+17:   hospitaler      3
+18:    house_gen      1
+19:    house_gen      2
+20:    house_gen      3
+21:    house_gen      4
+22:      instype      1
+23:      instype      2
+24:      k2q01_d      6
+25:        k8q30      4
+26:     metro_yn      1
+27:     metro_yn      2
+28:       mpc_yn      1
+29:       mpc_yn      2
+        variable  value
+          <char> <char>
+                                                                                                                                                                                                                                                   override_label
+                                                                                                                                                                                                                                                           <char>
+ 1:                                                                                                                                                                                     There is only one primary adult caregiver in the household for this child
+ 2:                                                                                                                                                                                            This child does not need health care coordinated on a weekly basis
+ 3:                                                                                                                                                                                       This child does not need health care provided at home on a weekly basis
+ 4:                                                                                                                                                                                                                      Very low birth weight (less than 1,500g)
+ 5:                                                                                                                                                                                                                           Low birth weight (less than 2,500g)
+ 6:                                                                                                                                                                                                                                          Not low birth weight
+ 7:                                                                                                                                                                        Currently insured (does not include Indian Health Service or a religious health share)
+ 8:                                                                                                                                                                Currently uninsured, or only insured through Indian Health Service or a religious health share
+ 9:                                                                                                                                                                                                                This child does not have any health conditions
+10:                                                                                                                                                                                                                                         Less than high school
+11:                                                                                                                                                                                                 High school (including vocational, trade, or business school)
+12:                                                                                                                                                                                                                                         More than high school
+13:                                                                                                                                                                                                                                         Less than high school
+14:                                                                                                                                                                                                 High school (including vocational, trade, or business school)
+15:                                                                                                                                                                                                                                                          None
+16:                                                                                                                                                                                                                                                        1 time
+17:                                                                                                                                                                                                                                               2 or more times
+18:                                                       1st generation household [Child is born outside the United States and all reported parents are born outside the United States. At least one parent must be reported as born outside the United States.]
+19: 2nd generation household [Child is born in the United States and at least one parent is born outside the United States OR child is born outside the United States, one parent is born in the United States and one parent is born outside the United States.]
+20:                                                                                                                                                                                  3rd+ generation [All parents in the household are born in the United States]
+21:                                                                                                                                                                                           Other [Child is born in the United States, parents are not listed.]
+22:                                                                                                                                                                                                                           Public only (government assistance)
+23:                                                                                                                                                           Private only (privately purchased, including through ACA marketplace, through employer, or TRICARE)
+24:                                                                                                                                                                                                                  This child does not have any teeth [T1 only]
+25:                                                                                                                                                                                                                                               Not well at all
+26:                                                                                                                                                                                                                                 Metropolitan Statistical Area
+27:                                                                                                                                                                                                                             Not Metropolitan Statistical Area
+28:                                                                                                                                                                                                                                   Metropolitan Principal City
+29:                                                                                                                                                                                                                               Not Metropolitan Principal City
+                                                                                                                                                                                                                                                   override_label
+                                                                                                                                                                                                                                                           <char>
+                            uncovered_years
+                                     <char>
+ 1:           2019,2020,2021,2022,2023,2024
+ 2:           2019,2020,2021,2022,2023,2024
+ 3:      2018,2019,2020,2021,2022,2023,2024
+ 4: 2017,2018,2019,2020,2021,2022,2023,2024
+ 5: 2017,2018,2019,2020,2021,2022,2023,2024
+ 6: 2017,2018,2019,2020,2021,2022,2023,2024
+ 7: 2017,2018,2019,2020,2021,2022,2023,2024
+ 8: 2017,2018,2019,2020,2021,2022,2023,2024
+ 9:           2019,2020,2021,2022,2023,2024
+10: 2017,2018,2019,2020,2021,2022,2023,2024
+11: 2017,2018,2019,2020,2021,2022,2023,2024
+12: 2017,2018,2019,2020,2021,2022,2023,2024
+13: 2017,2018,2019,2020,2021,2022,2023,2024
+14: 2017,2018,2019,2020,2021,2022,2023,2024
+15:                     2018,2019,2020,2021
+16:                     2018,2019,2020,2021
+17:                     2018,2019,2020,2021
+18: 2017,2018,2019,2020,2021,2022,2023,2024
+19: 2017,2018,2019,2020,2021,2022,2023,2024
+20: 2017,2018,2019,2020,2021,2022,2023,2024
+21: 2017,2018,2019,2020,2021,2022,2023,2024
+22:           2019,2020,2021,2022,2023,2024
+23:           2019,2020,2021,2022,2023,2024
+24:      2018,2019,2020,2021,2022,2023,2024
+25:      2018,2019,2020,2021,2022,2023,2024
+26: 2017,2018,2019,2020,2021,2022,2023,2024
+27: 2017,2018,2019,2020,2021,2022,2023,2024
+28: 2017,2018,2019,2020,2021,2022,2023,2024
+29: 2017,2018,2019,2020,2021,2022,2023,2024
+                            uncovered_years
+                                     <char>
+                                                                                                                                                                                                                                                                                 unique_descs
+                                                                                                                                                                                                                                                                                       <char>
+ 1:                                                                                     There is only one primary adult caregiver for [fill SC_NAME] || There is only one primary adult caregiver for this child || There is only one primary adult caregiver in the household for this child
+ 2:                                                                         (fill with SC_NAME) does not need health care provided on a weekly basis || This child does not need health care coordinated on a weekly basis || This child does not need health care provided on a weekly basis
+ 3:                                                                    (fill with SC_NAME) does not need health care provided on a weekly basis || This child does not need health care provided at home on a weekly basis || This child does not need health care provided on a weekly basis
+ 4:                                                                                                                                                                                                                         Very Low Birth Weight || Very low birth weight (less than 1,500g)
+ 5:                                                                                                                                                                                                                                   Low Birth Weight || Low birth weight (less than 2,500g)
+ 6:                                                                                                                                                                                                                                              Not low birth weight || Not Low Birth Weight
+ 7:                                                                                                                                                                               Currently insured || Currently insured (does not include Indian Health Service or a religious health share)
+ 8:                                                                                                                                                                     Currently uninsured || Currently uninsured, or only insured through Indian Health Service or a religious health share
+ 9:                                                                                                                                                                                                 This child does not have any conditions || This child does not have any health conditions
+10:                                                                                                                                                                                                                                            Less than high school || Less than High School
+11:                                                                                                                                                            High school (including vocational, trade, or business school) || High School (including vocational, trade, or business school)
+12:                                                                                                                                                                                                                                            More than high school || More than High School
+13:                                                                                                                                                                                                                                            Less than high school || Less than High School
+14:                                                                                                                                                            High school (including vocational, trade, or business school) || High School (including vocational, trade, or business school)
+15:                                                                                                                                                                                                                                                                Never || No visits || None
+16:                                                                                                                                                                                                                                                                         1 time || 1 visit
+17:                                                                                                                                                                                                                                          2 or more times || 2 or more visits || 2-3 times
+18:                                                       1st generation household || 1st generation household [Child is born outside the United States and all reported parents are born outside the United States. At least one parent must be reported as born outside the United States.]
+19: 2nd generation household || 2nd generation household [Child is born in the United States and at least one parent is born outside the United States OR child is born outside the United States, one parent is born in the United States and one parent is born outside the United States.]
+20:                                                                                                                                                                                           3rd+ generation || 3rd+ generation [All parents in the household are born in the United States]
+21:                                                                                                                                                        Other (child born in United States, parents are not listed) || Other [Child is born in the United States, parents are not listed.]
+22:                                                                                                                                                                                                 Public Only || Public only (government assistance) || Public only [government assistance]
+23:                                                                Private Only || Private only (privately purchased, including through ACA marketplace, through employer, or TRICARE) || Private only [privately purchased, including through ACA marketplace, through employer, or TRICARE]
+24:                                                                                                                                                                                     (fill with SC_NAME) does not have any teeth [T1 only] || This child does not have any teeth [T1 only]
+25:                                                                                                                                                                                                                                                             Not at all || Not well at all
+26:                                                                                                                                                                                                                         In Metropolitan Statistical Area || Metropolitan Statistical Area
+27:                                                                                                                                                                                                                 Not in Metropolitan Statistical Area || Not Metropolitan Statistical Area
+28:                                                                                                                                                                                                                             In Metropolitan Principal City || Metropolitan Principal City
+29:                                                                                                                                                                                                                     Not in Metropolitan Principal City || Not Metropolitan Principal City
+                                                                                                                                                                                                                                                                                 unique_descs
+                                                                                                                                                                                                                                                                                       <char>
+
+Full audit written to verify-out/label-drift-audit.csv
