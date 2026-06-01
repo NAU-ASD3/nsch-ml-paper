@@ -1,6 +1,6 @@
 library(data.table)
 library(ggplot2)
-sizes_dt <- fread("NSCH_data/01_original_sizes.csv")
+sizes_dt <- fread("NSCH_data/01_cleanTypes_sizes.csv")
 names_list <- list()
 for(dtype in c("var","define")){
   names_list[[dtype]] <- sizes_dt[
@@ -76,7 +76,8 @@ plot.compare_props <- function(x, ...){
 var_list <- list(
   family=names_list$var[desc=="Family Structure"],
   interest_curiosity=names_list$var[variable=="k6q71_r"],
-  autism=names_list$var[variable=="k2q35a"])
+  autism=names_list$var[variable=="k2q35a"],
+  k5q11=names_list$var[variable=="k5q11"])
 setkey(names_list$define, year, variable)
 surveys_meta <- setkey(sizes_dt[data_type=="surveys"], year)
 surveys_meta[, .(year, rows, cols)]
