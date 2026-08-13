@@ -2,6 +2,18 @@
 
 Interpretable machine learning analyses of NSCH data.
 
+## 13 Aug 2026
+
+[export-harmonized.R](export-harmonized.R) generates the combined harmonized
+data set for 2016-2024 and writes it to `export/` as gzipped CSV, with a
+`PROVENANCE.txt` recording the `nsch` package version, row and column counts,
+md5, and `sessionInfo()`. Output is 386,083 rows by 168 columns, from raw files
+carrying 432 to 484 columns per year.
+
+The per-year row counts match the raw counts in the 8 Feb 2026 table below
+exactly, so harmonization drops and duplicates nothing. A copy was shared with
+David. `export/` is gitignored, since the file is regenerable from this script.
+
 ## 13 Feb 2026
 
 [NSCH_data_example_2024.R](NSCH_data_example_2024.R) creates a small example data set with 2 rows, to use as an example in the R package.
