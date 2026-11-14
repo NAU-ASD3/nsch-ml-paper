@@ -2,6 +2,17 @@
 
 Interpretable machine learning analyses of NSCH data.
 
+## 13 Nov 2026
+
+[export-harmonized.R](export-harmonized.R) now covers 2016-2025, the years of the
+packages paper. With nsch 2026.11.9.2 the output is 431,222 rows by 167 columns.
+The row check counts each year's rows in its `.dta` file instead of reading
+`NSCH_data/01_cleanTypes_sizes.csv`, so a year added later needs no separate
+table of sizes, and the script stops if any column has no values in any year.
+PROVENANCE.txt now records the years. Install nsch from GitHub before running
+it (`remotes::install_github("NAU-ASD3/nsch")`), so PROVENANCE.txt records the
+commit instead of "local install".
+
 ## 13 Aug 2026
 
 [export-harmonized.R](export-harmonized.R) generates the combined harmonized
